@@ -11,7 +11,7 @@
 <body>
   <div class="root">
     <header class="header root__section">
-     <img src="<%=require('../images/logo.svg').default%>" alt="mesto logo" class="logo"><!-- -->
+     <img src="<%=require('./images/logo.svg').default%>" alt="mesto logo" class="logo"><!-- -->
     </header>
     <div class="profile root__section">
       <div class="user-info">
@@ -29,7 +29,7 @@
     </div>
     <div class="popup">
       <div class="popup__content">
-         <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close"> <!---->
+         <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close"> <!---->
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form" name="new">
             <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название">
@@ -41,7 +41,7 @@
 
       <div class="popup" id="popup-edit">
         <div class="popup__content">
-           <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close" id="popup__close-edit"> <!---->
+           <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close" id="popup__close-edit"> <!---->
           <h3 class="popup__title">Редактировать профиль</h3>
           <form class="popup__form popup__form-edit" name="edit" >
               <input type="text" name="nameUser" id="userName" class="popup__input popup__input_type_user-name" required minlength="2" maxlength="30" placeholder="Имя">
@@ -56,7 +56,7 @@
 
       <div class="popup" id="popup-img">
         <div class="popup__content" id="popup__content-img">
-            <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close" id="popup__close-img"><!---->
+            <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close" id="popup__close-img"><!---->
         </div>
         <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script> 
 

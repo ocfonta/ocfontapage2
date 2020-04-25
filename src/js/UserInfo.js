@@ -1,4 +1,4 @@
-
+import {userInfo, popup} from '../index.js';
 export class UserInfo {
 
   constructor(
@@ -19,7 +19,9 @@ export class UserInfo {
     this.api = api;
     this.nameValueForm = nameValueForm;
     this.jobValueForm = jobValueForm;
-    this.inputInfoApi = this.inputInfoApi.bind(this);
+  
+    
+    
   }
   string(nameStr, jobStr) {
 

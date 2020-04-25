@@ -7,24 +7,27 @@ import "./js/API.js";
 import "./js/FormValidator.js";
 import "./js/Popup.js";
 import "./js/UserInfo.js";
+
+export const listContainer = document.querySelector('.places-list');
+export const popupEditButton = document.querySelector('.popup__edit-button'); 
 import {Api} from './js/API.js';
 import {Card} from './js/Card.js';
 import {CardList} from './js/CardList.js';
 import {FormValidator} from './js/FormValidator.js';
 import {Popup} from './js/Popup.js';
 import {UserInfo} from './js/UserInfo';
-export {  editForm, popupEditButton, editButton, closeEditForm, formEdit, errorStatus, nameValueForm, jobValueForm};
+export {  editForm,  editButton, closeEditForm, formEdit,  nameValueForm, jobValueForm};
 
-export const listContainer = document.querySelector('.places-list');
+
 
 const newForm = document.forms.new;
 const editForm = document.querySelector('.popup__form-edit');
-const popupEditButton = document.querySelector('.popup__edit-button'); 
+
 
 const editButton = document.querySelector('.user-info__edit-button');
 const closeEditForm = document.querySelector('#popup__close-edit');
 const formEdit = document.forms.edit;
-let errorStatus = false;
+
 
 let nameValueForm = '';
 let jobValueForm = '';  
@@ -39,9 +42,9 @@ let jobValueForm = '';
 
 const card = new Card();
 const cardList = new CardList(card, api);
-const validator = new FormValidator();
-const popup = new Popup();
-const userInfo = new UserInfo(
+export const validator = new FormValidator();
+export const popup = new Popup();
+export const userInfo = new UserInfo(
   document.querySelector(".user-info__name"),
   document.querySelector(".user-info__job"),
   document.querySelector('.user-info__photo'),
