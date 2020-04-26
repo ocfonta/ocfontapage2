@@ -60,7 +60,7 @@ const card = new Card();
 const cardList = new CardList(card, api);
 const validator = new FormValidator();
 const popup = new Popup();
-const popupShowImage = new Popup(document.getElementById('bigimage'));
+
 
 const popupProfile = new Popup(document.getElementById('profile'), document.forms.edit, userInfo);
 popup.eventListeners();
