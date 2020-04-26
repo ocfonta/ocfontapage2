@@ -7,53 +7,89 @@ import "./js/API.js";
 import "./js/FormValidator.js";
 import "./js/Popup.js";
 import "./js/UserInfo.js";
-import {Api} from './js/API.js';
+const serverUrl = process.env.NODE_ENV === 'development' ? 'http://praktikum.tk/cohort9' : 'https://praktikum.tk/cohort9';
+export const listContainer = document.querySelector('.places-list');
+export const popupEditButton = document.querySelector('.popup__edit-button'); 
+import Api from './js/API.js';
 import {Card} from './js/Card.js';
 import {CardList} from './js/CardList.js';
-import {FormValidator} from './js/FormValidator.js';
-import {Popup} from './js/Popup.js';
-import {UserInfo} from './js/UserInfo';
-export {  editForm, popupEditButton, editButton, closeEditForm, formEdit, errorStatus, nameValueForm, jobValueForm};
+import FormValidator from './js/FormValidator.js';
+import Popup from './js/Popup.js';
+import UserInfo from './js/UserInfo';
+export {  editForm,  editButton, closeEditForm, formEdit,  nameValueForm, jobValueForm};
 
-export const listContainer = document.querySelector('.places-list');
+
 
 const newForm = document.forms.new;
 const editForm = document.querySelector('.popup__form-edit');
-const popupEditButton = document.querySelector('.popup__edit-button'); 
+
 
 const editButton = document.querySelector('.user-info__edit-button');
 const closeEditForm = document.querySelector('#popup__close-edit');
 const formEdit = document.forms.edit;
-let errorStatus = false;
+
 
 let nameValueForm = '';
 let jobValueForm = '';  
-
-
- const api = new Api({
+const config = {
+  baseUrl: serverUrl,
+ 
   headers: {
-    authorization: '6af9b0d5-fde9-4d91-8997-d01e8790c6cd',
-    'Content-Type': 'application/json'
-  }
-});
+      authorization: '6af9b0d5-fde9-4d91-8997-d01e8790c6cd',
+      'Content-Type': 'application/json'
+  },
+  myId: 'a40874464229b384c21cc7e2'
+};
+
+ const api = new Api(config);
+ const userInfo = new UserInfo(
+     document.querySelector('.user-info__name'),
+     document.querySelector('.user-info__job'),
+     document.querySelector('.user-info__photo')
+ );
+ 
+ userInfo.create();
+ api.getUserInfo().then((data) => {
+     userInfo.updateUserInfo(data.name, data.about, data.avatar);
+     console.log(data.avatar);
+ });
+
+
 
 const card = new Card();
 const cardList = new CardList(card, api);
 const validator = new FormValidator();
 const popup = new Popup();
-const userInfo = new UserInfo(
-  document.querySelector(".user-info__name"),
-  document.querySelector(".user-info__job"),
-  document.querySelector('.user-info__photo'),
-  formEdit.elements.nameUser,
-  formEdit.elements.jobUser,
-  nameValueForm,
-  jobValueForm,
-  api
-);
 
-//userCard
-function inputUserCard(event) {
+
+const popupProfile = new Popup(document.getElementById('profile'), document.forms.edit, userInfo);
+popup.eventListeners();
+
+const popupProfileValidate = new FormValidator(document.getElementById('profile'));
+popupProfileValidate.setEventListeners(document.querySelector('#username'));
+popupProfileValidate.setEventListeners(document.querySelector('#about'));
+document.querySelector('.user-info__edit-button').addEventListener('click', (event) => {
+    popupProfile.open(event);
+});
+
+ 
+
+
+
+ document.forms.edit.addEventListener('input',(event) => {
+      
+  validator.checkInputValidity(event);
+
+  validator.setSubmitButtonState();
+});
+
+
+
+
+
+ 
+
+ function inputUserCard(event) {
   const name = event.currentTarget.elements.name;
   const img = event.currentTarget.elements.link;
 
@@ -81,26 +117,17 @@ function addCardUser(event) {
   return [imageUrl, cardName];
 
 }
+
 newForm.addEventListener('input', inputUserCard);
 newForm.addEventListener('submit', addCardUser);
 
 cardList.getApi();
 cardList.addButtons();
-userInfo.infoApi();
-userInfo.infoEditListener();
 
-
-editForm.addEventListener('input', validator.setEventListeners);
-
-formEdit.addEventListener("submit", function (event) {
+document.forms.edit.addEventListener('submit', (event) => {
   event.preventDefault();
-  userInfo.setUserInfoEdit();
-  userInfo.inputInfoApi();
-  userInfo.setUserInfoEdit();
-
-
+  userInfo.updateUserInfo(document.forms.edit.nameUser.value, document.forms.edit.jobUser.value);
+  api.setUserInfo(document.forms.edit.nameUser.value, document.forms.edit.jobUser.value);
+  popupProfile.close();
 });
-
  
-
-
