@@ -5,7 +5,7 @@ import "./js/API.js";
 import "./js/FormValidator.js";
 import "./js/Popup.js";
 import "./js/UserInfo.js";
-const serverUrl = process.env.NODE_ENV === 'development' ? 'http://praktikum.tk/cohort9' : 'https://praktikum.tk/cohort9';
+const serverUrl = process.env.NODE_ENV === 'dev' ? 'http://praktikum.tk/cohort9' : 'https://praktikum.tk/cohort9';
 export const listContainer = document.querySelector('.places-list');
 export const popupEditButton = document.querySelector('.popup__edit-button'); 
 import Api from './js/API.js';
