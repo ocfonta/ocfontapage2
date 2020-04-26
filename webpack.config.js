@@ -82,11 +82,7 @@ module.exports = {
       filename: 'index.html'
     }),
     new WebpackMd5Hash(),
-<<<<<<< HEAD
     new webpack.DefinePlugin({
-=======
-   new webpack.DefinePlugin({
->>>>>>> develop
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         
     })
