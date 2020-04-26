@@ -19,9 +19,14 @@ export class UserInfo {
     this.api = api;
     this.nameValueForm = nameValueForm;
     this.jobValueForm = jobValueForm;
+    
+    this.inputInfoApi = this.inputInfoApi.bind(this);
+        
+    this.upgradeUserInfo = this.upgradeUserInfo.bind(this);
+
+    
+    
   
-    
-    
   }
   string(nameStr, jobStr) {
 
@@ -39,6 +44,10 @@ export class UserInfo {
     this.userJob.textContent = data.about;
     this.userPhoto.setAttribute('style',
       `background-image: url(${data.avatar})`);
+  }
+  upgradeUserInfo() {
+    this.userName.textContent = this.inputName.value;
+    this.userJob.textContent = this.inputJob.value;
   }
   infoEditListener() {
     document.querySelector('.user-info__edit-button').addEventListener('click', function () {
@@ -61,11 +70,17 @@ export class UserInfo {
   }
   inputInfoApi() {
     this.api.setUserInfo(this.nameValueForm, this.jobValueForm)
-      .then(function(res)  {
+      .then(function()  {
         popup.toggleEditPopup();
-        return this.updateUserInfo(res);
+
+    
 
 
+      })
+      .then(function()  {
+ 
+
+          this.upgradeUserInfo();
 
 
       })

@@ -30,9 +30,9 @@ export class Api {
         about: inpJob
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
+      .then(data => {
+        if (data.ok) {
+          return data.json();
         }
         return Promise.reject(`Что-то пошло не так ${err}`)
       })
@@ -46,12 +46,13 @@ export class Api {
     return fetch("https://praktikum.tk/cohort9/cards", this.options)
       .then(res => {
         if (res.ok) {
-
+       
           return res.json();
         }
         return Promise.reject(`Что-то пошло не так ${err}`)
       }
       )
+
       .catch(err => {
 
         return Promise.reject(`Что-то пошло не так ${err}`)
