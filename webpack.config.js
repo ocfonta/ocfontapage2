@@ -3,6 +3,7 @@ var webpack = require('webpack');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // подключаем плагин
 const isDev = process.env.NODE_ENV === 'development';
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash'); // добавили плагин
@@ -81,8 +82,9 @@ module.exports = {
       filename: 'index.html'
     }),
     new WebpackMd5Hash(),
-    new webpack.DefinePlugin({
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
+  //  new webpack.DefinePlugin({
+    //    'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        
+    //})
   ]
 };

@@ -1,12 +1,14 @@
 
 
 
-import {popupEditButton, validator} from '../index.js';
-export class FormValidator {
-    constructor() {
- this.checkInputValidity = this.checkInputValidity.bind(this);
- this.setSubmitButtonState = this.setSubmitButtonState.bind(this);
-    }
+import {popupEditButton} from '../index.js';
+export default class FormValidator {
+    constructor(popupElement) {
+
+
+  this.popupElement = popupElement;
+}
+    
     checkInputValidity(element) {
         const errorMessage = element.target.nextElementSibling;
         const value = element.target.value;
@@ -42,12 +44,11 @@ export class FormValidator {
           }
 
     }
-    setEventListeners(event) {
-      
-        validator.checkInputValidity(event);
-
-        validator.setSubmitButtonState();
-    }
+    setEventListeners(element) {
+      element.addEventListener('input', this.checkInputValidity.bind(this));
+  }
 }
+
+
 
 
